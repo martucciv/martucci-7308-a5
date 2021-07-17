@@ -1,6 +1,6 @@
 @startuml
 
-javajfx.org.Application <-- Main
+javafx.org.Application <-- Main
 Main -- MainWindowController
 MainWindowController -- EditItems
 MainWindowController -- SortItems
@@ -13,25 +13,27 @@ class Main{
 }
 
 class MainWindowController{
-    nameTextField: TextField;
-    sNumberTextField: TextField;
-    valueTextField: TextField;
-    searchDisplay: TextField;
-    itemsTableView: TableView;
-    itemsValueColumn: TableColumn;
-    itemsSNumberColumn: TableColumn;
-    itemsNameColumn: TableColumn;
-    menuBar: MenuBar;
-    fileOption: Menu;
-    helpOption: Menu;
-    openMenuItem: Menuitem;
-    saveAsMenuItem: MenuItem;
-
+    nameTextField: TextField
+    sNumberTextField: TextField
+    valueTextField: TextField
+    searchDisplay: TextField
+    itemsTableView: TableView
+    itemsValueColumn: TableColumn
+    itemsSNumberColumn: TableColumn
+    itemsNameColumn: TableColumn
+    menuBar: MenuBar
+    fileOption: Menu
+    helpOption: Menu
+    openMenuItem: MenuItem
+    saveAsMenuItem: MenuItem
+    fOption: FileOptions
 
     searchButtonClicked(actionEvent)
     addItemButtonClicked(actionEvent)
     deleteItemButtonClicked(actionEvent)
-    fileMenuButtonCLicked()
+    openButtonCLicked(MenuItem)
+    saveAllButtonClicked(MenuItem)
+    quitButtonClicked(MenuItem))
     helpMenuButtonClicked()
 }
 
@@ -56,11 +58,15 @@ class SearchItem{
 }
 
 class FileOptions{
+    fc: FileChooser
+    desktop: Desktop
+
     saveFile()
     saveAsTSV()
     saveAsHTML()
     saveAsJSON()
     openFile()
+    quitApp()
 }
 
 
