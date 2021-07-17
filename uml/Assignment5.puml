@@ -6,6 +6,7 @@ MainWindowController -- EditItems
 MainWindowController -- SortItems
 MainWindowController -- SearchItem
 MainWindowController -- FileOptions
+MainWindowController -- AddItems
 
 class Main{
     main()
@@ -37,8 +38,16 @@ class MainWindowController{
     helpMenuButtonClicked()
 }
 
+class AddItems{
+    getValue()
+    setValue()
+    getSerialNumber()
+    setSerialNumber()
+    getName()
+    setName()
+}
+
 class EditItems {
-    addNewItem()
     removeItem()
     editValue()
     editName()

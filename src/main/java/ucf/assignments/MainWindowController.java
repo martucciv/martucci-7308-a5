@@ -3,15 +3,23 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Veronica Martucci
  */
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class MainWindowController implements Initializable{
 
@@ -19,7 +27,7 @@ public class MainWindowController implements Initializable{
     @FXML public TextField sNumberTextField;
     @FXML public TextField valueTextField;
     @FXML public TextField searchDisplay;
-    @FXML public TableView itemsTableView;
+    @FXML public TableView<AddItems> itemsTableView;
     @FXML public TableColumn itemsValueColumn;
     @FXML public TableColumn itemsSNumberColumn;
     @FXML public TableColumn itemsNameColumn;
@@ -45,11 +53,20 @@ public class MainWindowController implements Initializable{
     @FXML
     public void searchButtonClicked(ActionEvent actionEvent) {
         //call methods from SearchItem class
+
     }
+
+    private final ObservableList<AddItems> item = FXCollections.observableArrayList();
+   // TableView<EditItems> table = new TableView<>();
 
     @FXML
     public void addItemButtonClicked(ActionEvent actionEvent) {
         //call addNewItem() from EditItem class
+
+        item.add(new AddItems(valueTextField.getText(),sNumberTextField.getText(), nameTextField.getText()));
+        valueTextField.clear();
+        sNumberTextField.clear();
+        nameTextField.clear();
     }
 
     @FXML
@@ -76,4 +93,6 @@ public class MainWindowController implements Initializable{
     public void helpMenuButtonClicked(){
         //create a pop up window to show app directions
     }
+
+
 }

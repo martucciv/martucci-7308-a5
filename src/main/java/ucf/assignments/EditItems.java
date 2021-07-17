@@ -6,10 +6,6 @@ package ucf.assignments;
 
 public class EditItems {
 
-    public void addNewItem(){
-        //add value, name, and serial number to list
-    }
-
     public void removeItem(){
         //remove selected item from the list
     }
