@@ -7,14 +7,14 @@ package ucf.assignments;
 public class SortItems {
 
     public void sortByValue(){
-
+        //sort the list by value
     }
 
     public void sortByName(){
-
+        //sort the list by name
     }
 
     public void sortBySerialNumber(){
-
+        //sort the list by serialnumber
     }
 }
