@@ -44,8 +44,4 @@ public class FileOptions {
          desktop.open(selectedFile);
       }
    }
-
-   public void quitApp(){
-      //quit the application
-   }
 }

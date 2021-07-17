@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,7 +29,6 @@ public class MainWindowController implements Initializable{
     @FXML public MenuItem openMenuItem;
     @FXML public MenuItem saveAsMenuItem;
     @FXML public MenuItem aboutMenuItem;
-    @FXML public MenuItem quitMenuItem;
 
     FileOptions fOption = new FileOptions();
 
@@ -38,28 +36,10 @@ public class MainWindowController implements Initializable{
     public void initialize(URL url, ResourceBundle rd){
 
         //if open... is clicked call openButtonClicked()
-        openMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                openButtonCLicked();
-            }
-        });
+        openMenuItem.setOnAction(event -> openButtonCLicked());
 
         //if saveAs... is clicked call saveAllButtonClicked()
-        saveAsMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                saveAllButtonClicked();
-            }
-        });
-
-        //if quit is clicked call quitButtonClicked()
-        quitMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                quitButtonClicked();
-            }
-        });
+        saveAsMenuItem.setOnAction(event -> saveAllButtonClicked());
     }
 
     @FXML
@@ -91,13 +71,6 @@ public class MainWindowController implements Initializable{
     public void saveAllButtonClicked(){
         //call saveFile() from FileOptions class
         fOption.saveFile();
-    }
-
-
-    public void quitButtonClicked(){
-        //call quitApp() from FileOptions class
-        FileOptions fOption = new FileOptions();
-
     }
 
     public void helpMenuButtonClicked(){
