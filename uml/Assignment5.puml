@@ -1,0 +1,58 @@
+@startuml
+
+javajfx.org.Application <-- Main
+Main -- MainWindowController
+MainWindowController -- EditItems
+MainWindowController -- SortItems
+MainWindowController -- SearchItem
+MainWindowController -- FileOptions
+
+class Main{
+    main()
+    start()
+}
+
+class MainWindowController{
+    nameTextField: TextField;
+    sNumberTextField: TextField;
+    valueTextField: TextField;
+    searchDisplay: TextField;
+    itemsTableView: TableView;
+    itemsValueColumn: TableColumn;
+    itemsSNumberColumn: TableColumn;
+    itemsNameColumn: TableColumn;
+
+    searchButtonClicked(actionEvent)
+    addItemButtonClicked(actionEvent)
+    deleteItemButtonClicked(actionEvent)
+}
+
+class EditItems {
+    addNewItem()
+    removeItem()
+    editValue()
+    editName()
+    editSerialNumber()
+}
+
+class SortItems{
+    sortByValue()
+    sortByName()
+    sortBySerialNumber()
+}
+
+class SearchItem{
+    searchByValue()
+    searchByName()
+    searchBySerialNumber()
+}
+
+class FileOptions{
+    saveAsTSV()
+    saveAsHTML()
+    saveAsJSON()
+    openFile()
+}
+
+
+@enduml
