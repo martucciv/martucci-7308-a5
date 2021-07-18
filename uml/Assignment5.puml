@@ -39,6 +39,10 @@ class MainWindowController{
 }
 
 class AddItems{
+    value: SimpleStringProperty
+    serialNumber: SimpleStringProperty
+    itemName: SimpleStringProperty
+
     getValue()
     setValue()
     getSerialNumber()

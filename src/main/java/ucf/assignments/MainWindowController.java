@@ -28,9 +28,9 @@ public class MainWindowController implements Initializable{
     @FXML public TextField valueTextField;
     @FXML public TextField searchDisplay;
     @FXML public TableView<AddItems> itemsTableView;
-    @FXML public TableColumn itemsValueColumn;
-    @FXML public TableColumn itemsSNumberColumn;
-    @FXML public TableColumn itemsNameColumn;
+    @FXML public TableColumn<AddItems, String> itemsValueColumn;
+    @FXML public TableColumn<AddItems, String> itemsSNumberColumn;
+    @FXML public TableColumn<AddItems, String> itemsNameColumn;
     @FXML public MenuBar menuBar;
     @FXML  public Menu fileOption;
     @FXML  public Menu helpOption;
@@ -48,6 +48,11 @@ public class MainWindowController implements Initializable{
 
         //if saveAs... is clicked call saveAllButtonClicked()
         saveAsMenuItem.setOnAction(event -> saveAllButtonClicked());
+
+        itemsValueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
+        itemsSNumberColumn.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
+        itemsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        itemsTableView.setItems(item);
     }
 
     @FXML
@@ -61,9 +66,9 @@ public class MainWindowController implements Initializable{
 
     @FXML
     public void addItemButtonClicked(ActionEvent actionEvent) {
-        //call addNewItem() from EditItem class
-
-        item.add(new AddItems(valueTextField.getText(),sNumberTextField.getText(), nameTextField.getText()));
+        //call AddItem class
+        AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
+        itemsTableView.getItems().add(ai);
         valueTextField.clear();
         sNumberTextField.clear();
         nameTextField.clear();

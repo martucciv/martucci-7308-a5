@@ -3,13 +3,9 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Veronica Martucci
  */
-
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class AddItems {
-    public final ObservableList<AddItems> item = FXCollections.observableArrayList();
     public final SimpleStringProperty value;
     public final SimpleStringProperty serialNumber;
     public final SimpleStringProperty itemName;
@@ -49,6 +45,5 @@ public class AddItems {
         //set name
         itemName.set(name);
     }
-
 }
 
