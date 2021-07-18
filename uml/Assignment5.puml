@@ -36,6 +36,9 @@ class MainWindowController{
     openButtonCLicked()
     saveAllButtonClicked()
     helpMenuButtonClicked()
+    valueEditChange()
+    serialNumberEditChange()
+    nameEditChange()
 }
 
 class AddItems{

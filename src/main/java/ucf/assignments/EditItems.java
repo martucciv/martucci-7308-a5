@@ -4,6 +4,8 @@ package ucf.assignments;
  *  Copyright 2021 Veronica Martucci
  */
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class EditItems {
 
     public void removeItem(){

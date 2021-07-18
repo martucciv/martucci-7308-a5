@@ -35,9 +35,9 @@
    <center>
       <TableView fx:id="itemsTableView" prefHeight="378.0" prefWidth="800.0" style="-fx-background-color: antiquewhite;" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="itemsValueColumn" prefWidth="257.0" text="Value" />
-          <TableColumn fx:id="itemsSNumberColumn" prefWidth="303.0" text="Serial Number" />
-          <TableColumn fx:id="itemsNameColumn" prefWidth="239.0" text="Name" />
+            <TableColumn fx:id="itemsValueColumn" onEditCommit="#valueEditChange" prefWidth="257.0" text="Value" />
+          <TableColumn fx:id="itemsSNumberColumn" onEditCommit="#serialNumberEditChange" prefWidth="303.0" text="Serial Number" />
+          <TableColumn fx:id="itemsNameColumn" onEditCommit="#nameEditChange" prefWidth="239.0" text="Name" />
         </columns>
       </TableView>
    </center>

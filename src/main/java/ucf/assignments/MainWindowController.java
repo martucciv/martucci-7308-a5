@@ -13,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -43,16 +44,25 @@ public class MainWindowController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rd){
 
-        //if open... is clicked call openButtonClicked()
+        //if open... in menu is clicked call openButtonClicked()
         openMenuItem.setOnAction(event -> openButtonCLicked());
 
-        //if saveAs... is clicked call saveAllButtonClicked()
+        //if saveAs... in menu is clicked call saveAllButtonClicked()
         saveAsMenuItem.setOnAction(event -> saveAllButtonClicked());
 
+        //set tableview
         itemsValueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
         itemsSNumberColumn.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
         itemsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         itemsTableView.setItems(item);
+
+        //allow value column to be edited
+        itemsTableView.setEditable(true);
+        itemsValueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //allow serial number to be edited
+        itemsSNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //allow name to be edited
+        itemsNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     @FXML
@@ -76,7 +86,8 @@ public class MainWindowController implements Initializable{
 
     @FXML
     public void deleteItemButtonClicked(ActionEvent actionEvent) {
-        //call removeItem() from EditItem class
+        //delete selected item from list
+        itemsTableView.getItems().removeAll(itemsTableView.getSelectionModel().getSelectedItem());
     }
 
     public void openButtonCLicked(){
@@ -100,4 +111,18 @@ public class MainWindowController implements Initializable{
     }
 
 
+    public void valueEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        AddItems valueSelected = itemsTableView.getSelectionModel().getSelectedItem();
+        valueSelected.setValue(addItemsStringCellEditEvent.getNewValue());
+    }
+
+    public void serialNumberEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        AddItems sNumberSelected = itemsTableView.getSelectionModel().getSelectedItem();
+        sNumberSelected.setSerialNumber(addItemsStringCellEditEvent.getNewValue());
+    }
+
+    public void nameEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        AddItems nameSelected = itemsTableView.getSelectionModel().getSelectedItem();
+        nameSelected.setName(addItemsStringCellEditEvent.getNewValue());
+    }
 }
