@@ -14,9 +14,9 @@ public class FileOptions {
 
    public void saveFile(){
       //create file chooser to save a file
-      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TSV", "*.*"));
-      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.*"));
-      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.*"));
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TSV", "*.TSV*"));
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.html*"));
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json*"));
       fc.showSaveDialog(null);
       //if TSV is selected call saveAsTSV()
       //else if HTML is selected call saveAsHTML()

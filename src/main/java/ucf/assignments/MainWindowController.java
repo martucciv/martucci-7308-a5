@@ -5,20 +5,27 @@ package ucf.assignments;
  */
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -40,6 +47,8 @@ public class MainWindowController implements Initializable{
     @FXML public MenuItem aboutMenuItem;
 
     FileOptions fOption = new FileOptions();
+    private final ObservableList<AddItems> item = FXCollections.observableArrayList();
+    private final FilteredList<AddItems> filteredData = new FilteredList<>(item, b -> true);
 
     @Override
     public void initialize(URL url, ResourceBundle rd){
@@ -49,6 +58,15 @@ public class MainWindowController implements Initializable{
 
         //if saveAs... in menu is clicked call saveAllButtonClicked()
         saveAsMenuItem.setOnAction(event -> saveAllButtonClicked());
+
+        //if about in help is clicked
+        aboutMenuItem.setOnAction(event -> {
+            try {
+                helpMenuButtonClicked();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         //set tableview
         itemsValueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
@@ -68,11 +86,43 @@ public class MainWindowController implements Initializable{
     @FXML
     public void searchButtonClicked(ActionEvent actionEvent) {
         //call methods from SearchItem class
+        searchDisplay.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(AddItems -> {
+               //if text is empty display all items
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+
+                //Change string to lower case
+                String lowerCase = newValue.toLowerCase();
+
+                SearchItem search = new SearchItem();
+
+                //search value column
+                if(AddItems.getValue().toLowerCase().contains(lowerCase)){
+                    return search.searchByValue();
+                }
+                //else search serial number column
+                else if(AddItems.getSerialNumber().toLowerCase().contains(lowerCase)){
+                    return search.searchBySerialNumber();
+                }
+                //else search name column
+                else if(AddItems.getName().toLowerCase().contains(lowerCase)){
+                    return search.searchByName();
+                }
+                //if theres no match
+                else{
+                    return false;
+                }
+            });
+        });
+
+        //wrap filtered list into a sorted list
+        SortedList<AddItems> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(itemsTableView.comparatorProperty());
+        itemsTableView.setItems(sortedData);
 
     }
-
-    private final ObservableList<AddItems> item = FXCollections.observableArrayList();
-   // TableView<EditItems> table = new TableView<>();
 
     @FXML
     public void addItemButtonClicked(ActionEvent actionEvent) {
@@ -106,8 +156,13 @@ public class MainWindowController implements Initializable{
         fOption.saveFile();
     }
 
-    public void helpMenuButtonClicked(){
+    public void helpMenuButtonClicked() throws IOException {
         //create a pop up window to show app directions
+        Parent root = FXMLLoader.load(getClass().getResource("helpMenu.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
 

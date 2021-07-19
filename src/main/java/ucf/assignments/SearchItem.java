@@ -6,21 +6,16 @@ package ucf.assignments;
 
 public class SearchItem {
 
-    public void searchByValue(){
-        //search for item in list by value
-        //highlight item that matched search description
+    public boolean searchByValue(){
+        return true;
     }
 
-    public void searchByName(){
-        //search for item in list by name
-        //highlight item that matched search description
-
+    public boolean searchByName(){
+        return true;
     }
 
-    public void searchBySerialNumber(){
-        //search for item in list by serial number
-        //highlight item that matched search description
-
+    public boolean searchBySerialNumber(){
+        return true;
     }
 }
 
