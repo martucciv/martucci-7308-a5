@@ -3,29 +3,38 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Veronica Martucci
  */
+import javafx.scene.control.TableColumn;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EditItemsTest {
 
+
     @Test
-    void addNewItem() {
+    void editValueTest_valueIsEditable() {
+        EditItems ei = new EditItems();
+        TableColumn<AddItems, String> itemsValueColumn = null;
+
+        assert false;
+        ei.editValue(itemsValueColumn);
     }
 
     @Test
-    void removeItem() {
+    void editNameTest() {
+        EditItems ei = new EditItems();
+        TableColumn<AddItems, String> itemsSNumberColumn = null;
+
+        assert false;
+        ei.editSerialNumber(itemsSNumberColumn);
     }
 
     @Test
-    void editValue() {
-    }
+    void editSerialNumberTest() {
+        EditItems ei = new EditItems();
+        TableColumn<AddItems, String> itemsNameColumn = null;
 
-    @Test
-    void editName() {
-    }
-
-    @Test
-    void editSerialNumber() {
+        assert false;
+        ei.editName(itemsNameColumn);
     }
 }

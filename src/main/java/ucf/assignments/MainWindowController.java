@@ -85,13 +85,15 @@ public class MainWindowController implements Initializable{
         itemsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         itemsTableView.setItems(item);
 
-        //allow value column to be edited
+        //allow tableview to be editable
+        EditItems ei = new EditItems();
         itemsTableView.setEditable(true);
-        itemsValueColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //allow value column to be edited
+        ei.editValue(itemsValueColumn);
         //allow serial number to be edited
-        itemsSNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        ei.editSerialNumber(itemsSNumberColumn);
         //allow name to be edited
-        itemsNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        ei.editName(itemsNameColumn);
     }
 
     @FXML
@@ -148,31 +150,11 @@ public class MainWindowController implements Initializable{
         nameTextField.clear();
     }
 
- /*   public void valueTextFieldFormat(KeyEvent keyEvent) {
-    //    MaskFormatter valueFormat = new MaskFormatter("$##.##");
-        String[] valueFormat = {"$##.##"};
-
-        for(String formatString : valueFormat){
-            try{
-                SimpleFormatter formatter = new SimpleFormatter(String formatString);
-                formatter.;
-            }
-            catch(ParseException e){
-                System.out.println("incorrect format");
-            }
-        }*/
-
-
-       /* String input = keyEvent.getText();
-        if(!(Character.isDigit(input))){
-
-        }
-    }*/
-
     @FXML
     public void deleteItemButtonClicked(ActionEvent actionEvent) {
         //delete selected item from list
-        itemsTableView.getItems().removeAll(itemsTableView.getSelectionModel().getSelectedItem());
+        EditItems ei = new EditItems();
+        ei.removeItem(itemsTableView);
     }
 
     public void openButtonCLicked(){
