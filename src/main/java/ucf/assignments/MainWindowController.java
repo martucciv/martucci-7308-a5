@@ -3,31 +3,31 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Veronica Martucci
  */
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
+import java.text.ParseException;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.logging.SimpleFormatter;
 
 public class MainWindowController implements Initializable{
 
@@ -45,6 +45,10 @@ public class MainWindowController implements Initializable{
     @FXML public MenuItem openMenuItem;
     @FXML public MenuItem saveAsMenuItem;
     @FXML public MenuItem aboutMenuItem;
+    @FXML public Menu sortMenu;
+    @FXML public MenuItem byValueMenuItem;
+    @FXML public MenuItem bySerialNumberMenuItem;
+    @FXML public MenuItem byNameMenuItem;
 
     FileOptions fOption = new FileOptions();
     private final ObservableList<AddItems> item = FXCollections.observableArrayList();
@@ -68,6 +72,13 @@ public class MainWindowController implements Initializable{
             }
         });
 
+        //if By Value is clicked from Sort menu
+        byValueMenuItem.setOnAction(event -> sortByValue());
+        //if By Serial Number is clicked from Sort menu
+        bySerialNumberMenuItem.setOnAction(event -> sortBySerialNumber());
+        //if By name is clicked from Sort menu
+        byNameMenuItem.setOnAction(event -> sortByName());
+
         //set tableview
         itemsValueColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
         itemsSNumberColumn.setCellValueFactory(new PropertyValueFactory<>("SerialNumber"));
@@ -85,6 +96,7 @@ public class MainWindowController implements Initializable{
 
     @FXML
     public void searchButtonClicked(ActionEvent actionEvent) {
+
         //call methods from SearchItem class
         searchDisplay.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(AddItems -> {
@@ -121,18 +133,41 @@ public class MainWindowController implements Initializable{
         SortedList<AddItems> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(itemsTableView.comparatorProperty());
         itemsTableView.setItems(sortedData);
-
     }
 
     @FXML
-    public void addItemButtonClicked(ActionEvent actionEvent) {
+    public void addItemButtonClicked(ActionEvent actionEvent) throws ParseException {
         //call AddItem class
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
+        MaskFormatter valueFormat = new MaskFormatter("$##.##");
+        valueFormat.setPlaceholderCharacter('#');
+
         itemsTableView.getItems().add(ai);
         valueTextField.clear();
         sNumberTextField.clear();
         nameTextField.clear();
     }
+
+ /*   public void valueTextFieldFormat(KeyEvent keyEvent) {
+    //    MaskFormatter valueFormat = new MaskFormatter("$##.##");
+        String[] valueFormat = {"$##.##"};
+
+        for(String formatString : valueFormat){
+            try{
+                SimpleFormatter formatter = new SimpleFormatter(String formatString);
+                formatter.;
+            }
+            catch(ParseException e){
+                System.out.println("incorrect format");
+            }
+        }*/
+
+
+       /* String input = keyEvent.getText();
+        if(!(Character.isDigit(input))){
+
+        }
+    }*/
 
     @FXML
     public void deleteItemButtonClicked(ActionEvent actionEvent) {
@@ -142,7 +177,6 @@ public class MainWindowController implements Initializable{
 
     public void openButtonCLicked(){
         //call openFile() from FileOptions class
-
         try{
             fOption.openFile();
         }
@@ -153,7 +187,7 @@ public class MainWindowController implements Initializable{
 
     public void saveAllButtonClicked(){
         //call saveFile() from FileOptions class
-        fOption.saveFile();
+        fOption.saveFile(itemsTableView);
     }
 
     public void helpMenuButtonClicked() throws IOException {
@@ -167,17 +201,41 @@ public class MainWindowController implements Initializable{
 
 
     public void valueEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        //allow value column to be editable
         AddItems valueSelected = itemsTableView.getSelectionModel().getSelectedItem();
         valueSelected.setValue(addItemsStringCellEditEvent.getNewValue());
     }
 
     public void serialNumberEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        //allow serial number column to be editable
         AddItems sNumberSelected = itemsTableView.getSelectionModel().getSelectedItem();
         sNumberSelected.setSerialNumber(addItemsStringCellEditEvent.getNewValue());
     }
 
     public void nameEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
+        //allow name column to be editable
         AddItems nameSelected = itemsTableView.getSelectionModel().getSelectedItem();
         nameSelected.setName(addItemsStringCellEditEvent.getNewValue());
     }
+
+    public void sortByValue(){
+        //call sortByValue() from SortItems class
+        SortItems si = new SortItems();
+        si.sortByValue(itemsTableView, itemsValueColumn);
+    }
+
+    public void sortBySerialNumber(){
+        //call sortBySerialNumber() from SortItems class
+        SortItems si = new SortItems();
+        si.sortBySerialNumber(itemsTableView, itemsSNumberColumn);
+    }
+
+    public void sortByName(){
+        //call SortByName() from SortItems class
+        SortItems si = new SortItems();
+        si.sortByName(itemsTableView, itemsNameColumn);
+
+    }
+
+
 }

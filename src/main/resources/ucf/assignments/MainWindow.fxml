@@ -29,6 +29,13 @@
               <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
+            <Menu fx:id="sortMenu" mnemonicParsing="false" text="Sort">
+              <items>
+                <MenuItem fx:id="byValueMenuItem" mnemonicParsing="false" text="By Value" />
+                  <MenuItem fx:id="bySerialNumberMenuItem" mnemonicParsing="false" text="By Serial Number" />
+                  <MenuItem fx:id="byNameMenuItem" mnemonicParsing="false" text="By Name" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -52,7 +59,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <TextField fx:id="valueTextField" promptText="Value" />
+                  <TextField fx:id="valueTextField" onKeyTyped="#valueTextFieldFormat" promptText="Value" />
                   <TextField fx:id="sNumberTextField" promptText="Serial Number" />
                   <TextField fx:id="nameTextField" promptText="Name" />
                   <Button mnemonicParsing="false" onAction="#addItemButtonClicked" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: antiquewhite;" text="Add Item" />

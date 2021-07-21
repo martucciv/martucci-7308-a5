@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: rosybrown;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="540.0" style="-fx-background-color: rosybrown;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label alignment="CENTER" prefHeight="67.0" prefWidth="175.0" text="Help Menu" BorderPane.alignment="CENTER">
          <font>
@@ -14,11 +13,11 @@
          </font>
       </Label>
    </top>
-   <center>
-      <TextArea prefHeight="500.0" prefWidth="522.0" style="-fx-background-color: antiquewhite;" text="&#10;Add Item:&#10;        - Type value, serial number, and name in textfield then &#10;           click &quot;Add Item&quot; button&#10;&#10;Delete Item:&#10;        - Click on item row then press &quot;Delete Seleted Item&quot; button&#10;&#10;Edit Item:&#10;        - Double click on item you want to edit, then press enter once done editing&#10;&#10;Search item: &#10;        - Press &quot;Search&quot; button then type in the search textfield &#10;&#10;Open File:&#10;        - Click file, then click Open...&#10;&#10;Save File:&#10;        - Click FIle, then click SaveAs... &#10;&#10;&#10;&#10;" BorderPane.alignment="CENTER">
+   <bottom>
+      <TextArea prefHeight="539.0" prefWidth="555.0" style="-fx-background-color: antiquewhite;" text="&#10;Add Item:&#10;        - Type value, serial number, and name in textfield then &#10;           click &quot;Add Item&quot; button&#10;&#10;Delete Item:&#10;        - Click on item row then press &quot;Delete Seleted Item&quot; button&#10;&#10;Edit Item:&#10;        - Double click on item you want to edit, then press enter once done editing&#10;&#10;Search item: &#10;        - Press &quot;Search&quot; button then type in the search textfield &#10;&#10;Open File:&#10;        - Click file, then click Open...&#10;&#10;Save File:&#10;        - Click FIle, then click SaveAs... &#10;&#10;Sort Table:&#10;        -click on &quot;Sort&quot; in menu to choose which way you want the table sorted, &#10;           then click the arrow next to the column title to sort&#10;&#10;&#10;&#10;" BorderPane.alignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
       </TextArea>
-   </center>
+   </bottom>
 </BorderPane>

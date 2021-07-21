@@ -4,17 +4,25 @@ package ucf.assignments;
  *  Copyright 2021 Veronica Martucci
  */
 
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 public class SortItems {
 
-    public void sortByValue(){
+    public void sortByValue(TableView<AddItems> itemsTableView, TableColumn<AddItems, String> itemsValueColumn){
         //sort the list by value
+        itemsTableView.getSortOrder().add(itemsValueColumn);
     }
 
-    public void sortByName(){
-        //sort the list by name
-    }
-
-    public void sortBySerialNumber(){
+    public void sortBySerialNumber(TableView<AddItems> itemsTableView, TableColumn<AddItems, String> itemsSNumberColumn){
         //sort the list by serialnumber
+        itemsTableView.getSortOrder().add(itemsSNumberColumn);
+
     }
+
+    public void sortByName(TableView<AddItems> itemsTableView, TableColumn<AddItems, String> itemsNameColumn){
+        //sort the list by name
+        itemsTableView.getSortOrder().add(itemsNameColumn);
+    }
+
 }
