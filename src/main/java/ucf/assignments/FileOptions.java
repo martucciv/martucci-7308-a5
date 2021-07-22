@@ -12,7 +12,9 @@ import javafx.stage.FileChooser;
 import javax.swing.text.Document;
 import javax.xml.parsers.DocumentBuilder;
 import java.awt.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -34,17 +36,14 @@ public class FileOptions {
       //if TSV is selected call saveAsTSV()
       saveAsJSON(itemsTableView);
       //else if HTML is selected call saveAsHTML()
-      saveAsHTML(file);
+      //saveAsHTML(file);
       //else if JSON is selected call saveAsJSON()
    }
 
-  /* public void readTableViewData(TableView<AddItems> itemsTableView){
-      AddItems items =  new AddItems();
-      for(int i = 0; i < itemsTableView.getItems().size();i++){
-         items = itemsTableView.getItems().get(i);
+   public void readTableViewData(TableView<AddItems> itemsTableView){
 
-      }
-   }*/
+
+   }
 
    public void saveAsTSV(TableView<AddItems> itemsTableView) throws IOException {
       //save as a TSV file
@@ -61,8 +60,10 @@ public class FileOptions {
 
    }
 
-   public void saveAsHTML(File file){
+   public void saveAsHTML(File file) throws IOException {
       //save as an HTML file
+     // STRING HTML =
+      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
 
    }
