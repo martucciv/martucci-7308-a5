@@ -4,7 +4,6 @@ package ucf.assignments;
  *  Copyright 2021 Veronica Martucci
  */
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;

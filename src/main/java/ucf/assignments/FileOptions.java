@@ -5,17 +5,12 @@ package ucf.assignments;
  */
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.JsonAdapter;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FileOptions {
    FileChooser fc = new FileChooser();

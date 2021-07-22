@@ -4,20 +4,31 @@ package ucf.assignments;
  *  Copyright 2021 Veronica Martucci
  */
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SearchItemTest {
 
     @Test
     void searchByValue() {
+        SearchItem si = new SearchItem();
+
+        boolean actual = si.searchByValue();
+        assertTrue(actual);
     }
 
     @Test
-    void searchByName() {
+    void searchByNameTest() {
+        SearchItem si = new SearchItem();
+
+        boolean actual = si.searchByName();
+        assertTrue(actual);
     }
 
     @Test
-    void searchBySerialNumber() {
+    void searchBySerialNumberTest() {
+        SearchItem si = new SearchItem();
+
+        boolean actual = si.searchBySerialNumber();
+        assertTrue(actual);
     }
 }

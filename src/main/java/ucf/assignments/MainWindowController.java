@@ -3,13 +3,10 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 5 Solution
  *  Copyright 2021 Veronica Martucci
  */
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,17 +14,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.SimpleFormatter;
 
 public class MainWindowController implements Initializable{
 
@@ -97,39 +88,37 @@ public class MainWindowController implements Initializable{
     }
 
     @FXML
-    public void searchButtonClicked(ActionEvent actionEvent) {
+    public void searchButtonClicked() {
 
         //call methods from SearchItem class
-        searchDisplay.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(AddItems -> {
-               //if text is empty display all items
-                if(newValue == null || newValue.isEmpty()){
-                    return true;
-                }
+        searchDisplay.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(AddItems -> {
+           //if text is empty display all items
+            if(newValue == null || newValue.isEmpty()){
+                return true;
+            }
 
-                //Change string to lower case
-                String lowerCase = newValue.toLowerCase();
+            //Change string to lower case
+            String lowerCase = newValue.toLowerCase();
 
-                SearchItem search = new SearchItem();
+            SearchItem search = new SearchItem();
 
-                //search value column
-                if(AddItems.getValue().toLowerCase().contains(lowerCase)){
-                    return search.searchByValue();
-                }
-                //else search serial number column
-                else if(AddItems.getSerialNumber().toLowerCase().contains(lowerCase)){
-                    return search.searchBySerialNumber();
-                }
-                //else search name column
-                else if(AddItems.getName().toLowerCase().contains(lowerCase)){
-                    return search.searchByName();
-                }
-                //if theres no match
-                else{
-                    return false;
-                }
-            });
-        });
+            //search value column
+            if(AddItems.getValue().toLowerCase().contains(lowerCase)){
+                return search.searchByValue();
+            }
+            //else search serial number column
+            else if(AddItems.getSerialNumber().toLowerCase().contains(lowerCase)){
+                return search.searchBySerialNumber();
+            }
+            //else search name column
+            else if(AddItems.getName().toLowerCase().contains(lowerCase)){
+                return search.searchByName();
+            }
+            //if theres no match
+            else{
+                return false;
+            }
+        }));
 
         //wrap filtered list into a sorted list
         SortedList<AddItems> sortedData = new SortedList<>(filteredData);
@@ -138,20 +127,29 @@ public class MainWindowController implements Initializable{
     }
 
     @FXML
-    public void addItemButtonClicked(ActionEvent actionEvent) throws ParseException {
+    public void addItemButtonClicked() throws IOException {
         //call AddItem class
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
-        MaskFormatter valueFormat = new MaskFormatter("$##.##");
-        valueFormat.setPlaceholderCharacter('#');
 
-        itemsTableView.getItems().add(ai);
+        if(!itemsTableView.getItems().contains(ai)){
+            itemsTableView.getItems().add(ai);
+        }
+       else{
+            //create a pop up window to show error
+            //if item is already in table, display error scene
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("itemErrorDisplay.fxml")));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
         valueTextField.clear();
         sNumberTextField.clear();
         nameTextField.clear();
     }
 
     @FXML
-    public void deleteItemButtonClicked(ActionEvent actionEvent) {
+    public void deleteItemButtonClicked() {
         //delete selected item from list
         EditItems ei = new EditItems();
         ei.removeItem(itemsTableView);
@@ -174,7 +172,7 @@ public class MainWindowController implements Initializable{
 
     public void helpMenuButtonClicked() throws IOException {
         //create a pop up window to show app directions
-        Parent root = FXMLLoader.load(getClass().getResource("helpMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("helpMenu.fxml")));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
