@@ -29,7 +29,4 @@ class FileOptionsTest {
     void openFile() {
     }
 
-    @Test
-    void quitApp() {
-    }
 }

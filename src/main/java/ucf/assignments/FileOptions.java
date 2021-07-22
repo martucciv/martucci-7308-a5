@@ -8,9 +8,13 @@ import com.google.gson.JsonObject;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
+
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class FileOptions {
    FileChooser fc = new FileChooser();
@@ -23,12 +27,14 @@ public class FileOptions {
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
       File file = fc.showSaveDialog(null);
 
+
       String filePath = file.getAbsolutePath();
 
       FileChooser.ExtensionFilter fileSaveOption = fc.getSelectedExtensionFilter();
       //if TSV is selected call saveAsTSV()
       saveAsJSON(itemsTableView);
       //else if HTML is selected call saveAsHTML()
+      saveAsHTML(file);
       //else if JSON is selected call saveAsJSON()
    }
 
@@ -55,8 +61,9 @@ public class FileOptions {
 
    }
 
-   public void saveAsHTML(){
+   public void saveAsHTML(File file){
       //save as an HTML file
+
 
    }
 

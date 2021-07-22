@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EditItemsTest {
 
-
     @Test
     void editValueTest_valueIsEditable() {
         EditItems ei = new EditItems();

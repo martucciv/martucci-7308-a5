@@ -31,8 +31,8 @@ public class MainWindowController implements Initializable{
     @FXML public TableColumn<AddItems, String> itemsSNumberColumn;
     @FXML public TableColumn<AddItems, String> itemsNameColumn;
     @FXML public MenuBar menuBar;
-    @FXML  public Menu fileOption;
-    @FXML  public Menu helpOption;
+    @FXML public Menu fileOption;
+    @FXML public Menu helpOption;
     @FXML public MenuItem openMenuItem;
     @FXML public MenuItem saveAsMenuItem;
     @FXML public MenuItem aboutMenuItem;
@@ -131,6 +131,7 @@ public class MainWindowController implements Initializable{
         //call AddItem class
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
 
+        //check that item isn't already in the table, then add item
         if(!itemsTableView.getItems().contains(ai)){
             itemsTableView.getItems().add(ai);
         }
@@ -143,6 +144,7 @@ public class MainWindowController implements Initializable{
             stage.setScene(scene);
             stage.show();
         }
+        //clear text fields
         valueTextField.clear();
         sNumberTextField.clear();
         nameTextField.clear();
@@ -214,8 +216,5 @@ public class MainWindowController implements Initializable{
         //call SortByName() from SortItems class
         SortItems si = new SortItems();
         si.sortByName(itemsTableView, itemsNameColumn);
-
     }
-
-
 }
