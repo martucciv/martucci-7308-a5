@@ -132,10 +132,28 @@ public class MainWindowController implements Initializable{
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
 
         //check that item isn't already in the table, then add item
-        if(!itemsTableView.getItems().contains(ai)){
+       if(sNumberTextField.getText().matches("[a-zA-Z0-9]{10}")){
+           if(!itemsTableView.getItems().contains(ai)){
+               itemsTableView.getItems().add(ai);
+           }
+           else{
+               //create a pop up window to show error
+               //if item is already in table, display error scene
+               Alert alert = new Alert(Alert.AlertType.ERROR, "Item already exists");
+               alert.showAndWait();
+           }
+       }
+       else{
+           //create a pop up window to show error
+           //if serial number is in the incorrect format, display error scene
+           Alert alert = new Alert(Alert.AlertType.ERROR, "Incorrect format please try again");
+           alert.showAndWait();
+       }
+
+        /*if(!itemsTableView.getItems().contains(ai)){
             itemsTableView.getItems().add(ai);
         }
-       else{
+        else{
             //create a pop up window to show error
             //if item is already in table, display error scene
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("itemErrorDisplay.fxml")));
@@ -143,7 +161,8 @@ public class MainWindowController implements Initializable{
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-        }
+        }*/
+
         //clear text fields
         valueTextField.clear();
         sNumberTextField.clear();

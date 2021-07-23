@@ -4,6 +4,9 @@ Add Item:
 - Type value, serial number, and name in textfield then
 click "Add Item" button
 
+- Serial number must be in the format XXXXXXXXXX
+  where X is any digit or letter
+
 Delete Item:
 - Click on item row then press "Delete Seleted Item" button
 
