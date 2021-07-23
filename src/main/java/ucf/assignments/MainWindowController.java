@@ -169,7 +169,7 @@ public class MainWindowController implements Initializable{
 
     public void saveAllButtonClicked(){
         //call saveFile() from FileOptions class
-        fOption.saveFile(itemsTableView);
+        fOption.saveFile(itemsTableView, itemsTableView.getScene().getWindow());
     }
 
     public void helpMenuButtonClicked() throws IOException {

@@ -29,16 +29,22 @@ class MainWindowController{
     saveAsMenuItem: MenuItem
     aboutMenuItem: MenuItem
     fOption: FileOptions
+    item: ObservableList<AddItems>
+    filteredData: FilteredList<AddItems>
 
-    searchButtonClicked(actionEvent)
-    addItemButtonClicked(actionEvent)
-    deleteItemButtonClicked(actionEvent)
+    initialize(URL, ResourceBundle)
+    searchButtonClicked()
+    addItemButtonClicked()
+    deleteItemButtonClicked()
     openButtonCLicked()
     saveAllButtonClicked()
     helpMenuButtonClicked()
     valueEditChange()
     serialNumberEditChange()
     nameEditChange()
+    sortByValue()
+    sortBySerialNumber()
+    sortByName()
 }
 
 class AddItems{
@@ -55,16 +61,16 @@ class AddItems{
 }
 
 class EditItems {
-    removeItem()
-    editValue()
-    editName()
-    editSerialNumber()
+    removeItem(TableView<AddItems>)
+    editValue(TableColumn<AddItems, String>)
+    editName(TableColumn<AddItems, String>)
+    editSerialNumber(TableColumn<AddItems, String>)
 }
 
 class SortItems{
-    sortByValue()
-    sortByName()
-    sortBySerialNumber()
+    sortByValue(TableView<AddItems>, TableColumn<AddItems, String>)
+    sortByName(TableView<AddItems>, TableColumn<AddItems, String>)
+    sortBySerialNumber(TableView<AddItems>, TableColumn<AddItems, String>)
 }
 
 class SearchItem{
@@ -76,11 +82,12 @@ class SearchItem{
 class FileOptions{
     fc: FileChooser
     desktop: Desktop
+    file: File
 
-    saveFile()
-    saveAsTSV()
-    saveAsHTML()
-    saveAsJSON()
+    saveFile(TableView<AddItems>, javafx.stage.Window)
+    saveAsTSV(File, TableView<AddItems>)
+    saveAsHTML(File, TableView<AddItems>)
+    saveAsJSON(TableView<AddItems>)
     openFile()
 }
 

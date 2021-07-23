@@ -8,27 +8,25 @@ import com.google.gson.JsonObject;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
-
-import javax.swing.text.Document;
-import javax.xml.parsers.DocumentBuilder;
 import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class FileOptions {
    FileChooser fc = new FileChooser();
    private final Desktop desktop = Desktop.getDesktop();
 
-   public void saveFile(TableView<AddItems> itemsTableView){
+   public void saveFile(TableView<AddItems> itemsTableView,javafx.stage.Window window ){
       //create file chooser to save a file
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TSV", "*.txt"));
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.html"));
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
-      File file = fc.showSaveDialog(null);
+      File file = fc.showSaveDialog(window);
+     /* if(file != null){
 
+      }*/
 
       String filePath = file.getAbsolutePath();
 
@@ -36,17 +34,13 @@ public class FileOptions {
       //if TSV is selected call saveAsTSV()
       saveAsJSON(itemsTableView);
       //else if HTML is selected call saveAsHTML()
-      //saveAsHTML(file);
+      //saveAsHTML(file, itemsTableView);
       //else if JSON is selected call saveAsJSON()
    }
 
-   public void readTableViewData(TableView<AddItems> itemsTableView){
-
-
-   }
-
-   public void saveAsTSV(TableView<AddItems> itemsTableView) throws IOException {
+   public void saveAsTSV(File file, TableView<AddItems> itemsTableView) throws IOException {
       //save as a TSV file
+
 /*
       FileWriter fileWriter = new FileWriter("*.txt");
       PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -60,12 +54,11 @@ public class FileOptions {
 
    }
 
-   public void saveAsHTML(File file) throws IOException {
+   public void saveAsHTML(File file, TableView<AddItems> itemsTableView) throws IOException {
       //save as an HTML file
-     // STRING HTML =
       BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-
-
+      bw.write(String.valueOf(itemsTableView));
+      bw.close();
    }
 
    public void saveAsJSON(TableView<AddItems> itemsTableView){
