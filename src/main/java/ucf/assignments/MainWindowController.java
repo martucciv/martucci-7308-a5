@@ -132,9 +132,14 @@ public class MainWindowController implements Initializable{
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
 
         //check that item isn't already in the table, then add item
-       if(sNumberTextField.getText().matches("[a-zA-Z0-9]{10}")){
+       if(sNumberTextField.getText().matches("[a-zA-Z0-9]{10}$")){
            if(!itemsTableView.getItems().contains(ai)){
                itemsTableView.getItems().add(ai);
+
+               //clear text fields
+               valueTextField.clear();
+               sNumberTextField.clear();
+               nameTextField.clear();
            }
            else{
                //create a pop up window to show error
@@ -149,24 +154,6 @@ public class MainWindowController implements Initializable{
            Alert alert = new Alert(Alert.AlertType.ERROR, "Incorrect format please try again");
            alert.showAndWait();
        }
-
-        /*if(!itemsTableView.getItems().contains(ai)){
-            itemsTableView.getItems().add(ai);
-        }
-        else{
-            //create a pop up window to show error
-            //if item is already in table, display error scene
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("itemErrorDisplay.fxml")));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-        }*/
-
-        //clear text fields
-        valueTextField.clear();
-        sNumberTextField.clear();
-        nameTextField.clear();
     }
 
     @FXML
