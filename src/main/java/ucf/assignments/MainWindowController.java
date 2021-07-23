@@ -181,7 +181,6 @@ public class MainWindowController implements Initializable{
         stage.show();
     }
 
-
     public void valueEditChange(TableColumn.CellEditEvent<AddItems, String> addItemsStringCellEditEvent) {
         //allow value column to be editable
         AddItems valueSelected = itemsTableView.getSelectionModel().getSelectedItem();
