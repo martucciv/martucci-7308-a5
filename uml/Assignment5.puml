@@ -83,6 +83,9 @@ class FileOptions{
     fc: FileChooser
     desktop: Desktop
     file: File
+    fos: FileOutputStream
+    ps: PrintStream
+    selectedFile: File
 
     saveFile(TableView<AddItems>, javafx.stage.Window)
     saveAsTSV(File, TableView<AddItems>)
