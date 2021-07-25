@@ -57,10 +57,20 @@ public class FileOptions {
       PrintStream ps = new PrintStream(fos);
 
       ps.println("<html lang=\"en\">");
+      ps.println("<body>");
+      ps.println("<table border = \"1\">");
+      ps.println("<th>Value\tSerial Number\tName</th>");
+
       for (AddItems item : itemsTableView.getItems()) {
-          //  ps.println("<p> </p>");
-            ps.println(item.getValue()+ "\t" +item.getSerialNumber() +"\t" +item.getName());
+
+         ps.println("<tr>" + "<td>");
+         ps.println(item.getValue()+ "\t\t" +item.getSerialNumber() +"\t\t" +item.getName());
+         ps.println("</td>");
+         ps.println("</tr>");
+         ps.println("\n");
       }
+      ps.println("</table>");
+      ps.println("</body>");
       ps.println("</html>");
 
    }
