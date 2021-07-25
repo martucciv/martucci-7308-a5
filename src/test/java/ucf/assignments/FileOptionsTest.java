@@ -1,32 +1,37 @@
 package ucf.assignments;
-/*
- *  UCF COP3330 Summer 2021 Assignment 5 Solution
- *  Copyright 2021 Veronica Martucci
- */
+
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileOptionsTest {
 
+    FileOptions fo = new FileOptions();
+
+    TableView<AddItems> itemsTableView;
+    File file;
+
     @Test
-    void saveFile() {
+    void saveAsTSVTest() throws IOException {
+        fo.saveAsTSV(file,itemsTableView);
     }
 
     @Test
-    void saveAsTSV() {
+    void saveAsHTMLTest() throws IOException {
+        fo.saveAsHTML(file, itemsTableView);
     }
 
     @Test
-    void saveAsHTML() {
+    void saveAsJSONTest() {
+        fo.saveAsJSON(itemsTableView);
     }
 
     @Test
-    void saveAsJSON() {
+    void openFileTest() throws IOException {
+        fo.openFile();
     }
-
-    @Test
-    void openFile() {
-    }
-
 }

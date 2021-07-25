@@ -22,7 +22,6 @@ public class FileOptions {
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
       File file = fc.showSaveDialog(window);
 
-      String filePath = file.getAbsolutePath();
       FileChooser.ExtensionFilter fileSaveOption = fc.getSelectedExtensionFilter();
 
       //if TSV is selected call saveAsTSV()
@@ -73,6 +72,7 @@ public class FileOptions {
       ps.println("</body>");
       ps.println("</html>");
 
+      ps.close();
    }
 
    public void saveAsJSON(TableView<AddItems> itemsTableView){
