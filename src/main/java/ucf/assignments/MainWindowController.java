@@ -52,7 +52,13 @@ public class MainWindowController implements Initializable{
         openMenuItem.setOnAction(event -> openButtonCLicked());
 
         //if saveAs... in menu is clicked call saveAllButtonClicked()
-        saveAsMenuItem.setOnAction(event -> saveAllButtonClicked());
+        saveAsMenuItem.setOnAction(event -> {
+            try {
+                saveAllButtonClicked();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         //if about in help is clicked
         aboutMenuItem.setOnAction(event -> {
@@ -127,7 +133,7 @@ public class MainWindowController implements Initializable{
     }
 
     @FXML
-    public void addItemButtonClicked() throws IOException {
+    public void addItemButtonClicked() {
         //call AddItem class
         AddItems ai = new AddItems(valueTextField.getText(), sNumberTextField.getText(), nameTextField.getText());
 
@@ -173,7 +179,7 @@ public class MainWindowController implements Initializable{
         }
     }
 
-    public void saveAllButtonClicked(){
+    public void saveAllButtonClicked() throws IOException {
         //call saveFile() from FileOptions class
         fOption.saveFile(itemsTableView, itemsTableView.getScene().getWindow());
     }

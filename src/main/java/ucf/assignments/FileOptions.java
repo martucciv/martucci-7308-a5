@@ -9,56 +9,60 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class FileOptions {
    FileChooser fc = new FileChooser();
    private final Desktop desktop = Desktop.getDesktop();
 
-   public void saveFile(TableView<AddItems> itemsTableView,javafx.stage.Window window ){
+   public void saveFile(TableView<AddItems> itemsTableView,javafx.stage.Window window ) throws IOException {
       //create file chooser to save a file
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("TSV", "*.txt"));
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.html"));
       fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
       File file = fc.showSaveDialog(window);
-     /* if(file != null){
-
-      }*/
 
       String filePath = file.getAbsolutePath();
-
       FileChooser.ExtensionFilter fileSaveOption = fc.getSelectedExtensionFilter();
+
       //if TSV is selected call saveAsTSV()
-      saveAsJSON(itemsTableView);
+      if(fileSaveOption.getDescription().equals("TSV")){
+         saveAsTSV(file, itemsTableView);
+      }
       //else if HTML is selected call saveAsHTML()
-      //saveAsHTML(file, itemsTableView);
-      //else if JSON is selected call saveAsJSON()
+      else if(fileSaveOption.getDescription().equals("HTML")){
+         saveAsHTML(file,  itemsTableView);
+      }
+      //else call saveAsJSON()
+      else{
+         saveAsJSON( itemsTableView);
+      }
    }
 
    public void saveAsTSV(File file, TableView<AddItems> itemsTableView) throws IOException {
       //save as a TSV file
+      FileOutputStream fos = new FileOutputStream(file);
+      PrintStream ps = new PrintStream(fos);
 
-/*
-      FileWriter fileWriter = new FileWriter("*.txt");
-      PrintWriter printWriter = new PrintWriter(fileWriter);
-      printWriter.println("Value\tSerial Number\tName");
-
-      for(int i = 0; i < itemsTableView.getItems().size(); i++){
-         printWriter.print()
+      ps.println("Value\tSerial Number\tName");
+      for (AddItems item : itemsTableView.getItems()) {
+         ps.println(item.getValue()+ "\t" +item.getSerialNumber() +"\t" +item.getName());
       }
-*/
-
-
+      ps.close();
    }
 
    public void saveAsHTML(File file, TableView<AddItems> itemsTableView) throws IOException {
       //save as an HTML file
-      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-      bw.write(String.valueOf(itemsTableView));
-      bw.close();
+      FileOutputStream fos = new FileOutputStream(file);
+      PrintStream ps = new PrintStream(fos);
+
+      ps.println("<html lang=\"en\">");
+      for (AddItems item : itemsTableView.getItems()) {
+          //  ps.println("<p> </p>");
+            ps.println(item.getValue()+ "\t" +item.getSerialNumber() +"\t" +item.getName());
+      }
+      ps.println("</html>");
+
    }
 
    public void saveAsJSON(TableView<AddItems> itemsTableView){
@@ -74,7 +78,6 @@ public class FileOptions {
          tableItems.add(item);
       }
       array.add(tableItems);
-
    }
 
    public void openFile() throws IOException {
